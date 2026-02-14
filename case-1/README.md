@@ -1,12 +1,12 @@
-# 📊 Econometrics Case Study — Econometrics I
+# 📊 Econometrics Case Study — Econometrics I (Case Study 1)
 
 ## 📌 Overview
 This repository contains a case study developed for the module **Econometrics I** at **Vienna University of Economics and Business**.  
 The project applies econometric methods to analyze **return of education**.
 
-**Authors:** Tsz Lam Hung, Daniel Diederichs and Julian Hofmaninger
-**Instructor:** Univ.Prof. David Preinerstorfer, Ph.D
-**Term:** Winter Term 2025/2026
+**Authors:** Tsz Lam Hung, Daniel Diederichs and Julian Hofmaninger  
+**Instructor:** Univ.Prof. David Preinerstorfer, Ph.D  
+**Term:** Winter Term 2025/2026  
 
 ---
 

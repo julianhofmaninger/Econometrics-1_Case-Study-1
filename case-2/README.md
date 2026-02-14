@@ -7,7 +7,6 @@ The project applies econometric methods to analyze the determinants of **birth w
 **Authors:** Tsz Lam Hung, Daniel Diederichs and Julian Hofmaninger  
 **Instructor:** Univ.Prof. David Preinerstorfer, Ph.D  
 **Term:** Winter Term 2025/2026  
-**Deadline:** November 10, 2025 @ 23:59  
 
 ---
 
@@ -37,12 +36,6 @@ File: `birthweight_smoking.xlsx`
 - `drinks` — Weekly number of alcoholic drinks during pregnancy  
 - `smoker` — Indicator variable equal to 1 if the mother smoked during pregnancy  
 - `tripre0` — Indicator variable equal to 1 if the mother had at least one prenatal medical visit  
-
-### Data Preparation
-- Imported Excel dataset into R  
-- Created a separate data frame containing only the variables listed above  
-- Checked for missing observations  
-- Generated descriptive statistics and correlation measures  
 
 ---
 
