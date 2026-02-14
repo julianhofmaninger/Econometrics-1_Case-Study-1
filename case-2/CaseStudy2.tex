@@ -1,0 +1,711 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage[]{biblatex}
+\addbibresource{references.bib}
+\PassOptionsToPackage{style=authoryear}{biblatex}
+\AtBeginDocument{\hypersetup{colorlinks=true, linkcolor=blue, citecolor=red, urlcolor=magenta}}
+\usepackage{bookmark}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Econometrics I - Case Study 2},
+  pdfauthor={Julian Hofmaninger, Tsz Lam Hung and Daniel Diederichs},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Econometrics I - Case Study 2}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Group 3, Instructor: Univ.Prof. David Preinerstorfer, Ph.D}
+\author{Julian Hofmaninger, Tsz Lam Hung and Daniel Diederichs}
+\date{November 10, 2025}
+
+\begin{document}
+\maketitle
+
+\subsection{Problem 1: Data aquisition}\label{problem-1-data-aquisition}
+
+\subsubsection{Loading data}\label{loading-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readxl)}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"Birthweight\_Smoking/birthweight\_smoking.xlsx"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Describing variables}\label{describing-variables}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data}\OtherTok{\textless{}{-}}\NormalTok{ data[, }\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}birthweight\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}age\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}educ\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}drinks\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}smoker\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tripre0\textquotesingle{}}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{birthweight}: Measures the weight (in grams) of babies at the
+  time of their birth.
+\item
+  \texttt{age}: Describes the age of the mother at the time her child
+  was born.
+\item
+  \texttt{educ}: Describes how many years of education the mother of the
+  newborn has. Education of more than 16 years is simply represented as
+  17.
+\item
+  \texttt{drinks}: Describes the number of drinks a mother used to have
+  during her pregnancy.
+\item
+  \texttt{smoker}: A numeric value that is equal to one if the mother of
+  the newborn smoked during pregnancy and equal to zero if she did not
+  smoke during the pregnancy.
+\item
+  \texttt{tripre0}: A numeric value that is equal to one if the mother
+  had no prenatal visit during her pregnancy and zero if she had at
+  least one.
+\end{itemize}
+
+\subsubsection{Predicted correlation}\label{predicted-correlation}
+
+\begin{itemize}
+\item
+  \texttt{birthweight} and \texttt{smoker}: We would suggest that
+  newborns whose mother smoked during pregnancy have a lower
+  birthweight. Smoking generally has negative effects on health and as
+  the article \autocite{kataoka2018smoking} suggests, the effects of a
+  mother smoking during pregnancy also has negative effects on the
+  health of the unborn child often resulting in lower birthweight.
+\item
+  \texttt{birthweight} and \texttt{tripre0}: We suggest that prenatal
+  care has a positive effect on the health of the baby and therefore
+  leading to higher birthweight. As the studies for Africa mentioned in
+  the article \autocite{engdaw2023effect} show mother's who have atleast
+  one prenatal visit during their pregnancy tend to rather give birth to
+  a baby of ``normal'' weight. Concluding we suggest a negative
+  correlation of \texttt{birthweight} and \texttt{tripre0}.
+\item
+  \texttt{birthweight} and \texttt{age}: Pregnancy tends to become
+  unsafer with an increasing age of the mother which would suggest a
+  negative correlation between \texttt{birthweight} and \texttt{age}.
+  However, the article \autocite{restrepo2015association} stresses that
+  younger mothers ``compete'' for nutrients with their unborn babies.
+  Therefore, birthweight tends to be lower on the ``extreme'' sides of
+  mother's age and the correlation mainly depends on the which
+  ``extreme-side'' is weighted heavier in the sample of observation.
+\end{itemize}
+
+\subsubsection{Empirical correlation}\label{empirical-correlation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{birthweight, data}\SpecialCharTok{$}\NormalTok{smoker)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.1691266
+\end{verbatim}
+
+The computed empirical correlation between \texttt{birthweight} and
+\texttt{smoker} is a negative number. This suggests that the birthweight
+of babies is higher when the mother does not smoke and therfore supports
+our argument.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{birthweight, data}\SpecialCharTok{$}\NormalTok{tripre0)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.1234999
+\end{verbatim}
+
+The computed empirical correlation between \texttt{birthweight} and
+\texttt{tripre0} is a negative number. This suggests that the
+birthweight of babies is higher when the mother has at least one
+prenatal visit during her pregnancy and therefore supports our argument.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{birthweight, data}\SpecialCharTok{$}\NormalTok{age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.08007321
+\end{verbatim}
+
+The computed empirical correlation between \texttt{birthweight} and
+\texttt{age} is a positive number. This suggests that the birthweight of
+babies is higher with an increasing age of the mother. However, the
+correlation is very weak therefore supporting the argument the argument
+that if the sample is evenly split in terms of age the effects tend to
+offset each other.
+
+\subsection{Problem 2: Plots}\label{problem-2-plots}
+
+\subsubsection{Density plots}\label{density-plots}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{ggplot}\NormalTok{(data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ birthweight, }\AttributeTok{color =} \FunctionTok{factor}\NormalTok{(smoker))) }\SpecialCharTok{+}
+       \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{linewidth =} \FloatTok{1.2}\NormalTok{) }\SpecialCharTok{+}
+      \FunctionTok{labs}\NormalTok{(}
+             \AttributeTok{title =} \StringTok{"Density of Birthweight by Smoking Status"}\NormalTok{,}
+             \AttributeTok{x =} \StringTok{"Birthweight (grams)"}\NormalTok{,}
+             \AttributeTok{y =} \StringTok{"Density"}\NormalTok{,}
+             \AttributeTok{color =} \StringTok{"Smoker"}\NormalTok{) }\SpecialCharTok{+}     \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{CaseStudy2_files/figure-latex/unnamed-chunk-3-1.pdf}}
+The graph shows that the distribution of the \texttt{birthweight} for
+the babies of mothers who did not smoke during their pregnancy have a
+higher mean value for \texttt{birthweight}. For the \texttt{birthweight}
+of babies with mothers who did smoke on the other hand the mean value of
+\texttt{birthweight} is lower and therefore supporting the arguments we
+made prior. Furthermore, the density plot of the smokers appears a
+little bit narrower which means there is less deviation from the mean
+and the left (lower birthweight) tail appears a little bit fatter. This
+aligns with a higher risk of low birthweight for babies of smokers.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ birthweight, }\AttributeTok{color =} \FunctionTok{factor}\NormalTok{(tripre0))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{linewidth =} \FloatTok{1.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Density of Birthweight by Prenatal Visit (tripre0)"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Birthweight (grams)"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Density"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"No Prenatal Visit"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{CaseStudy2_files/figure-latex/unnamed-chunk-4-1.pdf}}
+The graph shows that the distribution of the \texttt{birthweight} for
+the babies of mothers who had at least one prenatal visit during their
+pregnancy has a higher mean for \texttt{birthweight}. For the
+\texttt{birthweight} of babies with mothers who had no prenatal visit
+during their pregnancy at all on the other hand has a lower mean value
+for \texttt{birthweight}. Additionally it is clearly visible that the
+density curve for mother's who had no prenatal visit appears broader
+therefore indicating a wider spread of the birthweight values.
+Furthermore, the left tail (lower birthweight) is fatter for the
+birthweight of babies from mothers with no prenatal visit, thus aligning
+with the assumption that the risk of lower birthweight increases with no
+prenatal visits.
+
+\subsection{Problem 3: Multiple Linear
+Regression}\label{problem-3-multiple-linear-regression}
+
+\subsubsection{3.1 First Part: Model
+definition}\label{first-part-model-definition}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{linear\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(birthweight }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ educ }\SpecialCharTok{+}\NormalTok{ drinks }\SpecialCharTok{+}\NormalTok{ smoker }\SpecialCharTok{+}\NormalTok{ tripre0, }\AttributeTok{data=}\NormalTok{data)}
+\NormalTok{beta\_age }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(linear\_model)[}\StringTok{"age"}\NormalTok{]}
+\DecValTok{2}\SpecialCharTok{*}\NormalTok{beta\_age}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      age 
+## 7.267218
+\end{verbatim}
+
+If the age of the mother increases by two years (ceteris paribus), the
+birthweight of the baby increases by 7.27 grams.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{beta\_smoker }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(linear\_model)[}\StringTok{"smoker"}\NormalTok{]}
+\NormalTok{beta\_smoker}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    smoker 
+## -216.4648
+\end{verbatim}
+
+If you take a smoking mother (ceteris paribus), the birthweight of the
+baby will decrease by 216.46 grams.
+
+\subsubsection{3.2 Second Part: Model
+estimation}\label{second-part-model-estimation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(linear\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = birthweight ~ age + educ + drinks + smoker + tripre0, 
+##     data = data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2998.01  -304.18    21.97   364.46  2360.34 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 3156.187     73.066  43.196  < 2e-16 ***
+## age            3.634      2.206   1.647   0.0996 .  
+## educ          13.817      5.553   2.488   0.0129 *  
+## drinks       -12.822     15.452  -0.830   0.4067    
+## smoker      -216.465     27.652  -7.828 6.81e-15 ***
+## tripre0     -654.600    106.565  -6.143 9.18e-10 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 578.7 on 2994 degrees of freedom
+## Multiple R-squared:  0.04647,    Adjusted R-squared:  0.04488 
+## F-statistic: 29.18 on 5 and 2994 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{linear\_model\_excluding\_smoker }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(birthweight }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ educ }\SpecialCharTok{+}\NormalTok{ drinks }\SpecialCharTok{+}\NormalTok{ tripre0, }\AttributeTok{data=}\NormalTok{data)}
+\FunctionTok{summary}\NormalTok{(linear\_model\_excluding\_smoker)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = birthweight ~ age + educ + drinks + tripre0, data = data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2955.36  -318.80    26.55   369.22  2414.49 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 2987.740     70.525  42.364  < 2e-16 ***
+## age            4.477      2.225   2.012   0.0443 *  
+## educ          21.937      5.510   3.981 7.02e-05 ***
+## drinks       -23.895     15.542  -1.537   0.1243    
+## tripre0     -692.205    107.523  -6.438 1.41e-10 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 584.5 on 2995 degrees of freedom
+## Multiple R-squared:  0.02696,    Adjusted R-squared:  0.02566 
+## F-statistic: 20.74 on 4 and 2995 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+The first model has a higher value for \verb|R^2| indicating that it
+better suited for predicting the variability in the outcomes for the
+birthweight. This outcome is not suprising as this model has one more
+predictor variable which allows for better fitting to the outcomes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model\_plus }\OtherTok{\textless{}{-}}\NormalTok{ linear\_model}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{age}: The estimated coefficient for \texttt{age} is a positive
+  value therfore the model suggest increasing birthweight with an
+  increasing age of the mother. That means it contradicts with our
+  suggestion that ``extremes'' for age will equal out.
+\item
+  \texttt{smoker}: The estimated coefficient for \texttt{smoker} is a
+  negative value therfore the model suggests that smoking during the
+  pregnancy leads to a lower birthweight of babies. That aligns with our
+  prior suggestion.
+\item
+  \texttt{tripre0}: The estimated coefficient for \texttt{tripre0} is a
+  negative value therfore the model suggests that at least one prenatal
+  visit during pregnancy has a positive effect on the birthweight of a
+  baby. That aligns with our prior suggestion as well.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coef}\NormalTok{(model\_plus)[}\StringTok{"tripre0"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   tripre0 
+## -654.6002
+\end{verbatim}
+
+The value of the estimated coefficient for \texttt{tripre0} is -654.60
+that suggests that if the parameter is 0 (ceteris paribus), meaning that
+the mother has at least one prenatal visit, the birthweight of an baby
+increases by 654.60 grams.
+
+\subsubsection{3.3 Third Part: Estimator
+evaluation}\label{third-part-estimator-evaluation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SSR }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(}\FunctionTok{resid}\NormalTok{(model\_plus)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\NormalTok{degrees\_of\_freedom }\OtherTok{\textless{}{-}}\NormalTok{ model\_plus}\SpecialCharTok{$}\NormalTok{df.residual}
+\NormalTok{sigma2hat }\OtherTok{\textless{}{-}}\NormalTok{ SSR }\SpecialCharTok{/}\NormalTok{ degrees\_of\_freedom}
+\NormalTok{sigma2hat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 334919.1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(}\DecValTok{1}\NormalTok{, data}\SpecialCharTok{$}\NormalTok{age, data}\SpecialCharTok{$}\NormalTok{educ, data}\SpecialCharTok{$}\NormalTok{drinks, data}\SpecialCharTok{$}\NormalTok{smoker, data}\SpecialCharTok{$}\NormalTok{tripre0)}
+\NormalTok{Xt\_X }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(X) }\SpecialCharTok{\%*\%}\NormalTok{ X}
+\NormalTok{vcov\_matrix }\OtherTok{\textless{}{-}}\NormalTok{ sigma2hat }\SpecialCharTok{*} \FunctionTok{solve}\NormalTok{(Xt\_X)}
+\NormalTok{vcov\_matrix[}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 19.59575
+\end{verbatim}
+
+The value for \verb|Cov(educ,tripre0)| can be found at the indices (3,6)
+or (6,3). There we find a value of 19.596 which is a positive number and
+therefore indicating that there is a positive dependence on these two
+variables. Therfore, it can be said that when one of the variables
+increases the other one tends to increase as well.
+
+\subsection{Problem 4: Hypotheses Testing and
+Prediction}\label{problem-4-hypotheses-testing-and-prediction}
+
+\subsubsection{Interpretation of the test statistic, p-value and
+corresponding critical
+value}\label{interpretation-of-the-test-statistic-p-value-and-corresponding-critical-value}
+
+The test statistic is the ratio of the difference in the estimate of an
+parameter and the value it is assumed to have to the standard
+deviation/error of this parameter. Therefore, it effectively shows how
+many standard deviations/errors the estimate is away from the assumed
+value. The critical value is derived from the significance level and the
+underlying distribution. Say we use the significance level \(alpha = 5%
+\) and a standard normal distribution. The corresponding critical value
+is therefore given by around 1.96. If the t-statistic is higher than
+this value we reject the null hypothesis because it means that the
+estimate is less likely due to chance. If it is smaller than the
+critical value we retain the null hypothesis.
+
+The p-value is associated with the t-statistic and gives the probability
+in the respective distribution of observing an estimate that is as at
+least as extreme as the t-value given the condition that the null
+hypothesis is true. A p-value smaller than the significance level
+therefore leads us to rejecting the null hypothesis simply because it is
+very unlikely to observe such ``extreme'' values given the null
+hypothesis is true.
+
+\subsubsection{Impact of drinks}\label{impact-of-drinks}
+
+\[  H0 = \beta_3 = 0 \] \[  H1 = \beta_3 \neq 0 \]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha }\OtherTok{\textless{}{-}} \FloatTok{0.05}
+\NormalTok{c\_alpha }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alpha}\SpecialCharTok{/} \DecValTok{2}
+\NormalTok{c\_alpha}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.975
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{critical\_value }\OtherTok{\textless{}{-}} \FunctionTok{qnorm}\NormalTok{(c\_alpha)}
+\NormalTok{t\_drinks }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(}\FunctionTok{summary}\NormalTok{(model\_plus))[, }\StringTok{"t value"}\NormalTok{][}\StringTok{"drinks"}\NormalTok{]}
+\ControlFlowTok{if}\NormalTok{(}\FunctionTok{abs}\NormalTok{(t\_drinks) }\SpecialCharTok{\textless{}=}\NormalTok{ critical\_value)\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Do not reject H0 as the t{-}statistic is smaller than or equal to the critical value"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Reject H0 as the t{-}statistic is greater than the critical value"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Do not reject H0 as the t-statistic is smaller than or equal to the critical value"
+\end{verbatim}
+
+The test statistic is smaller than the \verb|c_alpha| value. Therfore,
+we do not reject the null hypothesis. This means that under a 5\%
+significance level we can not find evidence that the weekly number of
+drinks has an influence on the birthweight.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p\_drinks }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(}\FunctionTok{summary}\NormalTok{(model\_plus))[, }\StringTok{"Pr(\textgreater{}|t|)"}\NormalTok{][}\StringTok{"drinks"}\NormalTok{]}
+\ControlFlowTok{if}\NormalTok{(p\_drinks }\SpecialCharTok{\textless{}}\NormalTok{ alpha)\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Reject H0 as the p{-}value is smaller than the significance level"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Do not reject H0 as the p{-}value is greater than or equal to the significance level"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Do not reject H0 as the p-value is greater than or equal to the significance level"
+\end{verbatim}
+
+We can use the \verb|p-value| to show the same thing. In this case the
+\verb|p-value| is greater than the significance level. Therefore, values
+that are at least as ``extreme'' as the value of the t-statistic are
+plausible to happen under the null hypothesis therefore we refuse to
+reject the null hypothesis.
+
+\subsubsection{Impact of prenatal medical
+visits}\label{impact-of-prenatal-medical-visits}
+
+\[  H0 = \beta_5 = 0 \] \[  H1 = \beta_5 \neq 0 \]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{t\_tripre0 }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(}\FunctionTok{summary}\NormalTok{(model\_plus))[, }\StringTok{"t value"}\NormalTok{][}\StringTok{"tripre0"}\NormalTok{]}
+\ControlFlowTok{if}\NormalTok{(}\FunctionTok{abs}\NormalTok{(t\_tripre0) }\SpecialCharTok{\textless{}=}\NormalTok{ critical\_value)\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Do not reject H0 as the t{-}statistic is smaller than or equal to the critical value"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Reject H0 as the t{-}statistic is greater than the critical value"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Reject H0 as the t-statistic is greater than the critical value"
+\end{verbatim}
+
+The test statistic is greater than the \verb|c_alpha| value. Therfore,
+we reject the null hypothesis. This means that unless
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p\_tripre0 }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(}\FunctionTok{summary}\NormalTok{(model\_plus))[, }\StringTok{"Pr(\textgreater{}|t|)"}\NormalTok{][}\StringTok{"tripre0"}\NormalTok{]}
+\ControlFlowTok{if}\NormalTok{(p\_tripre0 }\SpecialCharTok{\textless{}}\NormalTok{ alpha)\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Reject H0 as the p{-}value is smaller than the significance level"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Do not reject H0 as the p{-}value is greater than or equal to the significance level"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Reject H0 as the p-value is smaller than the significance level"
+\end{verbatim}
+
+\subsubsection{Hypothesis testing for
+tripre0}\label{hypothesis-testing-for-tripre0}
+
+With formula (2) we can test the hypothesis that the effect of the
+parameter for \verb|tripre0| on birthweight is exactly 1 gram. We are
+dealing with an unknow standard deviation we should use the
+\verb|student-t distribution| although at the high number of degrees of
+freedom the crtical value will be quite close to the critical value we
+would retrieve from the standard normal distribution.
+\[  H0 = \beta_5 = 1 \] \[  H1 = \beta_5\neq 1 \]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{critical\_value }\OtherTok{\textless{}{-}} \FunctionTok{qt}\NormalTok{(c\_alpha, }\AttributeTok{df =}\NormalTok{ degrees\_of\_freedom)}
+\NormalTok{se\_tripre0 }\OtherTok{\textless{}{-}}\NormalTok{ vcov\_matrix[}\DecValTok{6}\NormalTok{,}\DecValTok{6}\NormalTok{]}
+\NormalTok{t\_tripre0 }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{coef}\NormalTok{(model\_plus)[}\StringTok{"tripre0"}\NormalTok{]}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{) }\SpecialCharTok{/} \FunctionTok{sqrt}\NormalTok{(se\_tripre0)}
+\ControlFlowTok{if}\NormalTok{(}\FunctionTok{abs}\NormalTok{(t\_tripre0) }\SpecialCharTok{\textless{}=}\NormalTok{ critical\_value)\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Do not reject H0 as the t{-}statistic is smaller than or equal to the critical value"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Reject H0 as the t{-}statistic is greater than the critical value"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Reject H0 as the t-statistic is greater than the critical value"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p\_tripre0 }\OtherTok{\textless{}{-}} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{pt}\NormalTok{(}\FunctionTok{abs}\NormalTok{(t\_tripre0), degrees\_of\_freedom))}
+\FunctionTok{print}\NormalTok{(p\_tripre0)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      tripre0 
+## 8.662404e-10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(p\_tripre0 }\SpecialCharTok{\textless{}}\NormalTok{ alpha)\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Reject H0 as the p{-}value is smaller than the significance level"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Do not reject H0 as the p{-}value is greater than or equal to the significance level"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Reject H0 as the p-value is smaller than the significance level"
+\end{verbatim}
+
+Since the p-value is so small the probability of observing a value as
+extreme or more extreme than the t-statistic is very unlikely under the
+null hypothesis. Therefore we reject the null hypothesis and hence the
+hypothesis that the effect of the \verb|tripre0| parameter is 1 gram.
+
+\subsubsection{Predict the birthweight with
+model+}\label{predict-the-birthweight-with-model}
+
+For a prediction of the birthweight with \verb|model+| we can use the
+inbuilt \verb|predict| function for a set of given values:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{age}: 28 years
+\item
+  \texttt{educ}: 12 years
+\item
+  \texttt{drinks}: 2 per week
+\item
+  \texttt{smoker}: 1 (Yes)
+\item
+  \texttt{tripre0}: 1 (No prenatal visit)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{newdata }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{age =} \DecValTok{28}\NormalTok{,}
+  \AttributeTok{educ =} \DecValTok{12}\NormalTok{,}
+  \AttributeTok{drinks =} \DecValTok{2}\NormalTok{,}
+  \AttributeTok{smoker =} \DecValTok{1}\NormalTok{,}
+  \AttributeTok{tripre0 =} \DecValTok{1}
+\NormalTok{)}
+\NormalTok{predicted\_bw }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model\_plus, }\AttributeTok{newdata =}\NormalTok{ newdata)}
+\NormalTok{predicted\_bw}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        1 
+## 2527.018
+\end{verbatim}
+
+\printbibliography
+
+\end{document}
